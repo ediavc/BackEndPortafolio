@@ -24,7 +24,7 @@ import org.springframework.web.bind.annotation.RestController;
 @CrossOrigin(origins = "https://frontendeavc.web.app")
 public class PersonaControlador {
     @Autowired
-    ImpPersonaServicio personaService;
+    ImpPersonaService personaService;
 
 @GetMapping("/lista")
 public ResponseEntity<List<Persona>> list(){
