@@ -40,22 +40,22 @@ public ResponseEntity<Persona> getById(@PathVariable("id") int id){
     Persona persona = personaService.getOne(id).get();
     return new ResponseEntity(persona, HttpStatus.OK);
 }
-    
-    @PostMapping("/crear")
-    public ResponseEntity<?> create(@RequestBody dtoPersona dtopersona) {
+ @PostMapping("/create")
+    public String createPersona(@RequestBody dtoPersona dtopersona) {
         if (StringUtils.isBlank(dtopersona.getNombre())) {
-            return new ResponseEntity(new Mensaje("El nombre es obligatorio"), HttpStatus.BAD_REQUEST);
+            return "El nombre es obligatorio";
         }
         if (personaService.existsByNombre(dtopersona.getNombre())) {
-            return new ResponseEntity(new Mensaje("Ese nombre ya existe"), HttpStatus.BAD_REQUEST);
+            return "Ese nombre ya existe";
         }
 
         Persona persona = new Persona(
         dtopersona.getNombre(), dtopersona.getApellido(), dtopersona.getDescripcion(), dtopersona.getImg());
         personaService.save(persona);
-        return new ResponseEntity(new Mensaje("Persona creada"), HttpStatus.OK);
+        return "Persona creada";
 
-    }
+ }
+   
 /*@PostMapping("/personas/crear")
    public String createPersona(@RequestBody Persona persona)
    {personaService.save(persona);
